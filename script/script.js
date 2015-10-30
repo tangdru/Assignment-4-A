@@ -12,6 +12,7 @@ var canvas = d3.select('.plot')
 
 var scaleR = d3.scale.sqrt().domain([5,100]).range([5,120]);
 
+
 d3.csv('data/olympic_medal_count.csv', parse, dataLoaded);
 
 function dataLoaded(err,rows){
@@ -57,7 +58,7 @@ function draw(rows, year){
     var nodesEnter = nodes.enter().append('g')
         .attr('class','country')
         .attr('transform',function(d,index){
-            return 'translate('+index*150+','+800+')';
+            return 'translate('+index*100+','+85+')';
         })
 
     nodesEnter.append('circle')
@@ -66,20 +67,23 @@ function draw(rows, year){
         .style('stroke', 'rgb(255,255,255)')
         .style('stroke-width', '1px')
 
+
     nodesEnter.append('text')
         .attr('class','label')
         .text(function(d){return d.country;})
+        .style('text-anchor','middle')
 
 
     nodesEnter.append('text')
         .text(function(d){return d[year];})
-        .attr('y',20)
+        .attr('y',16)
         .style('font-size', '10px')
         .attr('class','medals')
+        .style('text-anchor','middle')
 
     nodes.exit()
         .transition().duration(300)
-        .style("opacity", .1)
+        .style("opacity", .20)
         .remove();
 
     nodes
